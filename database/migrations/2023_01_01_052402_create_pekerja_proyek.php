@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('denda', function (Blueprint $table) {
+        Schema::create('pekerja_proyek', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_denda')->unique();
-            $table->string('kode_rental');
-            $table->date('tanggal_denda');
-            $table->bigInteger('jumlah_denda');
+            $table->string('kode_pekerja_proyek')->unique();
+            $table->string('kode_proyek');
+            $table->bigInteger('nip');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('denda');
+        Schema::dropIfExists('pekerja_proyek');
     }
 };

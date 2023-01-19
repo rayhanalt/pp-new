@@ -73,8 +73,22 @@
                         </div>
                     </div>
                 @endif
+                @if (session()->has('error'))
+                    <div
+                        class="alert alert-error absolute left-2 top-1 w-1/3 shadow-lg transition-all duration-300 lg:left-20 lg:top-20 lg:w-1/4 lg:animate-bounce">
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0 stroke-current"
+                                fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span> {{ session('error') }}</span>
+                        </div>
+                    </div>
+                @endif
                 <h1 data-aos-duration="500" data-aos="fade-right" class="text-5xl font-bold">Login now!</h1>
-                <p data-aos-duration="700" data-aos="fade-right" class="py-6">Provident cupiditate voluptatem et in.
+                <p data-aos-duration="700" data-aos="fade-right" class="py-6">Provident cupiditate voluptatem et
+                    in.
                     Quaerat fugiat ut
                     assumenda
                     excepturi
@@ -89,11 +103,11 @@
                     <div class="card-body">
                         <div class="form-control">
                             <label class="label">
-                                <span class="label-text">Username</span>
+                                <span class="label-text">NIP</span>
                             </label>
-                            <input type="text" name="username" placeholder="email" class="input-bordered input"
+                            <input type="text" name="nip" placeholder="NIP" class="input-bordered input"
                                 required />
-                            @error('username')
+                            @error('nip')
                                 <span class="text-xs text-red-500">
                                     {{ $message }}
                                 </span>

@@ -1,13 +1,13 @@
 <?php
 
+use App\Models\Denda;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DendaController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MobilController;
 use App\Http\Controllers\RentalController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Denda;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,19 +33,19 @@ Route::get('/loginpage', function () {
 // Dashboard
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 // Mobil
-Route::resource('/mobil', MobilController::class)->except('show')->middleware('auth');
+// Route::resource('/mobil', MobilController::class)->except('show')->middleware('auth');
 
-// Customer
-Route::resource('/customer', CustomerController::class)->except('show')->middleware('auth');
+// Pegawai
+Route::resource('/pegawai', PegawaiController::class)->except('show')->middleware('auth');
 
 // Rental
-Route::resource('/rental', RentalController::class)->except('show')->middleware('auth');
+// Route::resource('/rental', RentalController::class)->except('show')->middleware('auth');
 
 // Denda
-Route::resource('/denda', DendaController::class)->except('show')->middleware('auth');
-Route::controller(DendaController::class)->group(function () {
-    Route::get('/denda/getData/{kode_rental}', 'getData')->middleware('auth');
-});
+// Route::resource('/denda', DendaController::class)->except('show')->middleware('auth');
+// Route::controller(DendaController::class)->group(function () {
+//     Route::get('/denda/getData/{kode_rental}', 'getData')->middleware('auth');
+// });
 // login
 Route::controller(LoginController::class)->group(function () {
     Route::post('/login', 'auth');

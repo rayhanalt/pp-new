@@ -2,23 +2,24 @@
 @section('content')
     <div class="overflow-x-auto">
         <div class="card shadow-xl">
-            <h3 class="sticky top-0 text-lg font-bold">Tambah Data Customer
+            <h3 class="sticky top-0 text-lg font-bold">Ubah Data Pegawai
                 <hr>
             </h3>
             <div class="card-body">
-                <form action="/customer" method="post" enctype="multipart/form-data">
+                <form action="/pegawai/{{ $item->nip }}" method="post" enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     <div class="form-control w-full max-w-full">
                         <label class="label">
-                            <span class="label-text">Nik</span>
+                            <span class="label-text">NIP</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <input name="nik" type="text" placeholder="Type here" value="{{ old('nik') }}"
+                        <input name="nip" type="text" placeholder="Type here" value="{{ old('nip') }}"
                             class="input-bordered input w-full max-w-full" />
                         <label class="label">
                             <span class="label-text-alt"></span>
                             <span class="label-text-alt text-red-600">
-                                @error('nik')
+                                @error('nip')
                                     {{ $message }}
                                 @enderror
                             </span>
@@ -42,32 +43,34 @@
                     </div>
                     <div class="form-control w-full max-w-full">
                         <label class="label">
-                            <span class="label-text">Alamat</span>
+                            <span class="label-text">Password</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <textarea class="textarea-bordered textarea h-24" name="alamat" cols="30" placeholder="click here" rows="10">{{ old('alamat') }}</textarea>
-                        {{-- <input name="alamat" type="text" placeholder="click here" value="{{ old('alamat') }}"
-                            class="input-bordered input w-full max-w-full" /> --}}
+                        <input name="password" type="text" placeholder="" value="12345"
+                            class="input-bordered input w-full max-w-full" readonly />
                         <label class="label">
                             <span class="label-text-alt"></span>
                             <span class="label-text-alt text-red-600">
-                                @error('alamat')
-                                    {{ $message }}
-                                @enderror
+                                You can change it by your self when loged in
                             </span>
                         </label>
                     </div>
                     <div class="form-control w-full max-w-full">
                         <label class="label">
-                            <span class="label-text">No Telp</span>
+                            <span class="label-text">Jabatan</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <input name="no_telp" type="number" placeholder="Type here" value="{{ old('no_telp') }}"
-                            class="input-bordered input w-full max-w-full" />
+                        <select class="select-bordered select" name="jabatan">
+                            <option disabled selected>Pick one</option>
+                            <option value="admin">Admin</option>
+                            <option value="manajer">Manajer</option>
+                            <option value="staff">Staff</option>
+
+                        </select>
                         <label class="label">
                             <span class="label-text-alt"></span>
                             <span class="label-text-alt text-red-600">
-                                @error('no_telp')
+                                @error('jabatan')
                                     {{ $message }}
                                 @enderror
                             </span>

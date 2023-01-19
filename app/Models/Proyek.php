@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Rental extends Model
+class Proyek extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'rental';
+    protected $table = 'proyek';
 
     public function getRouteKeyName()
     {
-        return 'kode_rental';
+        return 'kode_proyek';
     }
 
     public static function boot()
@@ -21,25 +21,34 @@ class Rental extends Model
         parent::boot();
         static::creating(
             function ($model) {
-                $model->kode_rental = 'KR-' . rand(100000, 999999);
+                $model->kode_proyek = 'KP-' . rand(100000, 999999);
             }
         );
     }
 
     // belongs to
-    public function getMobil()
+    public function getPegawai()
     {
-        return $this->belongsTo(Mobil::class, 'nopol', 'nopol');
-    }
-    public function getCustomer()
-    {
-        return $this->belongsTo(Customer::class, 'nik', 'nik');
+        return $this->belongsTo(Pegawai::class, 'nip', 'nip');
     }
 
+
     // hasMany
-    public function haveDenda()
+    public function havePekerjaProyek()
     {
-        return $this->hasMany(Denda::class, 'kode_rental', 'kode_rental');
+        return $this->hasMany(PekerjaProyek::class, 'kode_proyek', 'kode_proyek');
+    }
+    public function havePerkembanganProyek()
+    {
+        return $this->hasMany(PerkembanganProyek::class, 'kode_proyek', 'kode_proyek');
+    }
+    public function havePengadaanBarang()
+    {
+        return $this->hasMany(PengadaanBarang::class, 'kode_proyek', 'kode_proyek');
+    }
+    public function haveBidang()
+    {
+        return $this->hasMany(Bidang::class, 'kode_proyek', 'kode_proyek');
     }
 
     // Validasi

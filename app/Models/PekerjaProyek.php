@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File;
 
-class Mobil extends Model
+class PekerjaProyek extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'mobil';
+    protected $table = 'pekerja_proyek';
 
     public function getRouteKeyName()
     {
-        return 'kode_mobil';
+        return 'kode_pekerja_proyek';
     }
 
     public static function boot()
@@ -22,14 +22,18 @@ class Mobil extends Model
         parent::boot();
         static::creating(
             function ($model) {
-                $model->kode_mobil = 'KM-' . rand(100000, 999999);
+                $model->kode_pekerja_proyek = 'KPK-' . rand(100000, 999999);
             }
         );
     }
-    //  hasMany
-    public function haveRental()
+    //  BelongsTo
+    public function getPegawai()
     {
-        return $this->hasMany(Rental::class, 'nopol', 'nopol');
+        return $this->belongsTo(Pegawai::class, 'nip', 'nip');
+    }
+    public function getProyek()
+    {
+        return $this->belongsTo(Proyek::class, 'kode_proyek', 'kode_proyek');
     }
 
     public static function createValidate($request)

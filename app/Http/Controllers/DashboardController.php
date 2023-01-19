@@ -12,9 +12,9 @@ class DashboardController extends Controller
     public function index()
     {
         return view('dashboard', [
-            'mobil' => Mobil::count(),
-            'customer' => Customer::count(),
-            'rental' => Rental::count(),
+            // 'mobil' => Mobil::count(),
+            // 'customer' => Customer::count(),
+            // 'rental' => Rental::count(),
         ]);
     }
 }

@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Denda extends Model
+class PerkembanganProyek extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $table = 'denda';
+    protected $table = 'perkembangan_proyek';
 
     public function getRouteKeyName()
     {
-        return 'kode_denda';
+        return 'kode_perkembangan_proyek';
     }
 
     public static function boot()
@@ -21,15 +21,19 @@ class Denda extends Model
         parent::boot();
         static::creating(
             function ($model) {
-                $model->kode_denda = 'KD-' . rand(100000, 999999);
+                $model->kode_perkembangan_proyek = 'KPR-' . rand(100000, 999999);
             }
         );
     }
 
     // belongsTo
-    public function getRental()
+    public function getProyek()
     {
-        return $this->belongsTo(Rental::class, 'kode_rental', 'kode_rental');
+        return $this->belongsTo(Proyek::class, 'kode_proyek', 'kode_proyek');
+    }
+    public function getPegawai()
+    {
+        return $this->belongsTo(Pegawai::class, 'nip', 'nip');
     }
 
     // Validasi

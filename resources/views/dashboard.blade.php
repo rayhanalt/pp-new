@@ -36,7 +36,7 @@
                     </svg>
                 </div>
                 <div class="stat-title">Jumlah Data Mobil</div>
-                <div class="stat-value">{{ $mobil }}</div>
+                {{-- <div class="stat-value">{{ $mobil }}</div> --}}
             </div>
 
             <div class="stat">
@@ -58,7 +58,7 @@
                     </svg>
                 </div>
                 <div class="stat-title">Jumlah Data Customer</div>
-                <div class="stat-value">{{ $customer }}</div>
+                {{-- <div class="stat-value">{{ $customer }}</div> --}}
             </div>
 
             <div class="stat">
@@ -70,7 +70,7 @@
                     </svg>
                 </div>
                 <div class="stat-title">Jumlah Data Rental</div>
-                <div class="stat-value">{{ $rental }}</div>
+                {{-- <div class="stat-value">{{ $rental }}</div> --}}
             </div>
 
         </div>

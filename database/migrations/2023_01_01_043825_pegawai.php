@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer', function (Blueprint $table) {
+        Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nik')->unique();
+            $table->bigInteger('nip')->unique();
             $table->string('nama');
-            $table->text('alamat');
-            $table->char('no_telp');
+            // $table->text('alamat');
+            // $table->char('no_telp');
+            // $table->string('kode_bidang');
             // $table->string('email')->unique();
             $table->timestamps();
         });
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer');
+        Schema::dropIfExists('pegawai');
     }
 };

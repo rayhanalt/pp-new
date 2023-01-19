@@ -17,11 +17,12 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'username',
-        'password',
-    ];
+    // protected $fillable = [
+    //     'nip',
+    //     'password',
+    // ];
+    protected $guarded = ['id'];
+    protected $table = 'users';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,4 +39,10 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
+    // hasOne
+    public function HasPegawai()
+    {
+        return $this->hasOne(Pegawai::class, 'nip', 'nip');
+    }
 }

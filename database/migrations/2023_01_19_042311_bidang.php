@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('bidang', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('nip')->unique();
-            $table->string('password');
-            $table->enum('jabatan', ['admin', 'staff', 'manajer']);
-            $table->rememberToken();
+            $table->string('kode_bidang')->unique();
+            $table->bigInteger('nama_bidang');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('bidang');
     }
 };

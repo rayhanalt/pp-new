@@ -1,6 +1,6 @@
 @extends('app')
 @section('content')
     <div class="overflow-auto">
-        @livewire('customer')
+        @livewire('pegawai')
     </div>
 @endsection

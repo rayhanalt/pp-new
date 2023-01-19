@@ -36,10 +36,26 @@
             <label for="my-drawer" class="drawer-overlay"></label>
             <ul class="menu w-80 bg-base-100 p-4 text-base-content">
                 <!-- Sidebar content here -->
-                <li><a href="/customer">Customer</a></li>
-                <li><a href="/mobil">Mobil</a></li>
-                <li><a href="/rental">Rental</a></li>
-                <li><a href="/denda">Denda</a></li>
+                @can('manajer')
+                    <li><a href="/proyek">Proyek</a></li>
+                    <li><a href="/bidang">Bidang</a></li>
+                    <li><a href="/pegawai">Pegawai</a></li>
+                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/barang">Pengadaan Barang</a></li>
+                    <li><a href="/perkembangan">Perkembangan Proyek</a></li>
+                @endcan
+                @can('admin')
+                    <li><a href="/proyek">Proyek</a></li>
+                    <li><a href="/bidang">Bidang</a></li>
+                    <li><a href="/pegawai">Pegawai</a></li>
+                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/barang">Pengadaan Barang</a></li>
+                @endcan
+                @can('staff')
+                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/barang">Pengadaan Barang</a></li>
+                    <li><a href="/perkembangan">Perkembangan Proyek</a></li>
+                @endcan
             </ul>
         </div>
     </div>

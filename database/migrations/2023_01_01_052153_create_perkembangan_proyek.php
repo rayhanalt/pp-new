@@ -13,16 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('mobil', function (Blueprint $table) {
+        Schema::create('perkembangan_proyek', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_mobil')->unique();
-            $table->string('nopol')->unique();
-            $table->string('merk');
-            $table->string('model');
-            $table->date('tahun');
-            $table->string('warna');
-            $table->integer('harga_sewa');
-            $table->string('gambar');
+            $table->string('kode_perkembangan_proyek')->unique();
+            $table->string('kode_proyek');
+            $table->bigInteger('nip');
+            $table->string('keterangan');
+            $table->date('tanggal_dibuat');
+            $table->string('foto');
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mobil');
+        Schema::dropIfExists('perkembangan_proyek');
     }
 };

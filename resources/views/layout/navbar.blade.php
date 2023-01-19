@@ -12,7 +12,12 @@
         <a href="/" class="btn-ghost btn text-xl normal-case">Home</a>
     </div>
     <div data-aos-duration="800" data-aos="fade-down" class="flex-2 mr-3">
-        <span class="btn-ghost btn text-sm normal-case">{{ auth()->user()->name }}</span>
+        <span class="btn-ghost btn text-sm normal-case">{{ auth()->user()->hasPegawai->nama }} |
+            {{ auth()->user()->jabatan }}
+            @if (session()->has('error'))
+                | {{ session('error') }}
+            @endif
+        </span>
     </div>
     <div data-aos-duration="1000" data-aos="fade-down" class="flex-none">
         @if (auth()->user())
