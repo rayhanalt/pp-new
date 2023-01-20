@@ -43,6 +43,8 @@
                     <li><a href="/timproyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                            Profil</a></li>
                 @endcan
                 @can('admin')
                     <li><a href="/proyek">Proyek</a></li>
@@ -50,11 +52,15 @@
                     <li><a href="/pegawai">Pegawai</a></li>
                     <li><a href="/timproyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                            Profil</a></li>
                 @endcan
                 @can('staff')
                     <li><a href="/timproyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                            Profil</a></li>
                 @endcan
             </ul>
         </div>

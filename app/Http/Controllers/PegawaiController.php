@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Pegawai;
+use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -107,34 +108,79 @@ class PegawaiController extends Controller
     public function update(Request $request, Pegawai $pegawai)
     {
         $rules = [
-            'nama' => 'required',
-            'jabatan' => 'required'
+            'nama' => 'required'
         ];
 
         if ($request->nip != $pegawai->nip) {
             $rules['nip'] = 'required|numeric|unique:pegawai,nip';
         }
-        if ($request->password != null) {
 
-            DB::table('users')->where('nip', '=', $pegawai->nip)->update([
-                'password' => bcrypt($request->password),
-            ]);
+        if (Auth::user()->nip == $pegawai->nip) {
+
+            if ($request->password != null) {
+
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'password' => bcrypt($request->password),
+                ]);
+
+                $validasi = $request->validate($rules);
+
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'nip' => $request->nip,
+                ]);
+
+                $pegawai->update($validasi);
+
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+                return redirect('/loginpage');
+            }
+
+            if ($request->password == null) {
+
+                $validasi = $request->validate($rules);
+
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'nip' => $request->nip,
+                ]);
+
+                $pegawai->update($validasi);
+
+                return redirect('/')->with('success', 'Data has been updated!')->withInput();
+            }
         }
-        $validasi = $request->validate($rules);
 
-        // if ($request->password  != null) {
-        //     $validasi['password'] = Hash::make($validasi['password']);
-        // }
-        // dd(json_encode($pegawai->nip));
-        DB::table('users')->where('nip', '=', $pegawai->nip)->update([
-            'nip' => $request->nip,
-            'jabatan' => $validasi['jabatan']
-        ]);
+        if (Auth::user()->nip != $pegawai->nip) {
+            if ($request->password != null) {
 
-        $pegawai->update($validasi);
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'password' => bcrypt($request->password),
+                ]);
 
+                $validasi = $request->validate($rules);
 
-        return redirect('/pegawai')->with('success', 'Data has been updated!')->withInput();
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'nip' => $request->nip,
+                    'jabatan' => $request->jabatan
+                ]);
+
+                $pegawai->update($validasi);
+            }
+
+            if ($request->password == null) {
+
+                $validasi = $request->validate($rules);
+
+                DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                    'nip' => $request->nip,
+                    'jabatan' => $request->jabatan
+                ]);
+
+                $pegawai->update($validasi);
+            }
+            return redirect('/pegawai')->with('success', 'Data has been updated!')->withInput();
+        }
     }
 
     /**
@@ -145,7 +191,9 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
+        AuthUser::where('nip', $pegawai->nip)->delete();
         $pegawai->delete();
+
 
         return redirect()->back()->with('success', 'Data has been deleted!');
     }

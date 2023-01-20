@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Denda as ModelsDenda;
+use App\Models\PengadaanBarang;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Denda extends Component
+class Barang extends Component
 {
     use WithPagination;
     public $search;
@@ -19,8 +19,8 @@ class Denda extends Component
     {
         return view('livewire.denda', [
             'data' => $this->search === null ?
-                ModelsDenda::orderBy('id', 'desc')->Paginate(3)->withQueryString() :
-                ModelsDenda::orderBy('id', 'desc')->where('kode_denda', 'like', '%' . $this->search . '%')
+                PengadaanBarang::orderBy('id', 'desc')->Paginate(3)->withQueryString() :
+                PengadaanBarang::orderBy('id', 'desc')->where('kode_denda', 'like', '%' . $this->search . '%')
                 ->orWhere('kode_rental', 'like', '%' . $this->search . '%')
                 ->orWhere('tanggal_denda', 'like', '%' . $this->search . '%')
                 ->orWhere('jumlah_denda', 'like', '%' . $this->search . '%')

@@ -55,27 +55,28 @@
                             </span>
                         </label>
                     </div>
-                    <div class="form-control w-full max-w-full">
-                        <label class="label">
-                            <span class="label-text">Jabatan</span>
-                            <span class="label-text-alt"></span>
-                        </label>
-                        <select class="select-bordered select" name="jabatan">
-                            <option disabled>Pick one</option>
-                            <option @if ($item->jabatan == 'admin') selected @endif value="admin">Admin</option>
-                            <option @if ($item->jabatan == 'manajer') selected @endif value="manajer">Manajer</option>
-                            <option @if ($item->jabatan == 'staff') selected @endif value="staff">Staff</option>
-
-                        </select>
-                        <label class="label">
-                            <span class="label-text-alt"></span>
-                            <span class="label-text-alt text-red-600">
-                                @error('jabatan')
-                                    {{ $message }}
-                                @enderror
-                            </span>
-                        </label>
-                    </div>
+                    @if (Auth()->user()->nip != $item->nip)
+                        <div class="form-control w-full max-w-full">
+                            <label class="label">
+                                <span class="label-text">Jabatan</span>
+                                <span class="label-text-alt"></span>
+                            </label>
+                            <select class="select-bordered select" name="jabatan">
+                                <option disabled>Pick One</option>
+                                <option value="admin" @if ($item->getUser->jabatan == 'admin') selected @endif>Admin</option>
+                                <option value="manajer" @if ($item->getUser->jabatan == 'manajer') selected @endif>Manajer</option>
+                                <option value="staff" @if ($item->getUser->jabatan == 'staff') selected @endif>Staff</option>
+                            </select>
+                            <label class="label">
+                                <span class="label-text-alt"></span>
+                                <span class="label-text-alt text-red-600">
+                                    @error('jabatan')
+                                        {{ $message }}
+                                    @enderror
+                                </span>
+                            </label>
+                        </div>
+                    @endif
                     <div class="card-actions justify-end">
                         <button type="submit" class="btn-error btn">Reset</button>
                         <button type="submit"class="btn btn-success">Simpan</button>

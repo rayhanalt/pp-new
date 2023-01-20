@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Rental as ModelsRental;
+use App\Models\Proyek as ModelsProyek;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Rental extends Component
+class Proyek extends Component
 {
     use WithPagination;
 
@@ -21,8 +21,8 @@ class Rental extends Component
     {
         return view('livewire.rental', [
             'data' => $this->search === null ?
-                ModelsRental::with('getMobil', 'getCustomer')->orderBy('id', 'desc')->Paginate(3)->withQueryString() :
-                ModelsRental::with('getMobil', 'getCustomer')->orderBy('id', 'desc')
+                ModelsProyek::with('getMobil', 'getCustomer')->orderBy('id', 'desc')->Paginate(3)->withQueryString() :
+                ModelsProyek::with('getMobil', 'getCustomer')->orderBy('id', 'desc')
                 ->where('kode_rental', 'like', '%' . $this->search . '%')
                 ->orWhere('nik', 'like', '%' . $this->search . '%')
                 ->orWhere('nopol', 'like', '%' . $this->search . '%')

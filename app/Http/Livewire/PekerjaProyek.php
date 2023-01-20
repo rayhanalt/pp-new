@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Mobil as ModelsMobil;
+use App\Models\PekerjaProyek as ModelsPekerjaProyek;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Mobil extends Component
+class PekerjaProyek extends Component
 {
     use WithPagination;
     public $search;
@@ -20,8 +20,8 @@ class Mobil extends Component
     {
         return view('livewire.mobil', [
             'data' => $this->search === null ?
-                ModelsMobil::orderBy('id', 'desc')->Paginate(3)->withQueryString() :
-                ModelsMobil::orderBy('id', 'desc')->where('nopol', 'like', '%' . $this->search . '%')
+                ModelsPekerjaProyek::orderBy('id', 'desc')->Paginate(3)->withQueryString() :
+                ModelsPekerjaProyek::orderBy('id', 'desc')->where('nopol', 'like', '%' . $this->search . '%')
                 ->orWhere('merk', 'like', '%' . $this->search . '%')
                 ->orWhere('model', 'like', '%' . $this->search . '%')
                 ->orWhere('tahun', 'like', '%' . $this->search . '%')
