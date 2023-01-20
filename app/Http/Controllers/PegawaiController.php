@@ -61,7 +61,7 @@ class PegawaiController extends Controller
             pegawai::create($validasiPegawai);
 
             DB::table('users')->insert([
-                'nip' => $request->nip,
+                'nip' => $validasiPegawai['nip'],
                 'password' => bcrypt('12345'),
                 'jabatan' => $request->jabatan,
             ]);
@@ -115,19 +115,24 @@ class PegawaiController extends Controller
             $rules['nip'] = 'required|numeric|unique:pegawai,nip';
         }
         if ($request->password != null) {
-            $rules['password'] = 'required';
+
+            DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+                'password' => bcrypt($request->password),
+            ]);
         }
         $validasi = $request->validate($rules);
 
         // if ($request->password  != null) {
         //     $validasi['password'] = Hash::make($validasi['password']);
         // }
+        // dd(json_encode($pegawai->nip));
+        DB::table('users')->where('nip', '=', $pegawai->nip)->update([
+            'nip' => $request->nip,
+            'jabatan' => $validasi['jabatan']
+        ]);
 
         $pegawai->update($validasi);
-        DB::table('users')->where('nip', $pegawai->nip)->update([
-            'nip' => $request->nip,
-            'password' => bcrypt($request->password)
-        ]);
+
 
         return redirect('/pegawai')->with('success', 'Data has been updated!')->withInput();
     }
