@@ -14,7 +14,7 @@
                             <span class="label-text">NIP</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <input name="nip" type="text" placeholder="Type here" value="{{ old('nip') }}"
+                        <input name="nip" type="text" placeholder="Type here" value="{{ old('nip', $item->nip) }}"
                             class="input-bordered input w-full max-w-full" />
                         <label class="label">
                             <span class="label-text-alt"></span>
@@ -30,7 +30,7 @@
                             <span class="label-text">Nama</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <input name="nama" type="text" placeholder="Type here" value="{{ old('nama') }}"
+                        <input name="nama" type="text" placeholder="Type here" value="{{ old('nama', $item->nama) }}"
                             class="input-bordered input w-full max-w-full" />
                         <label class="label">
                             <span class="label-text-alt"></span>
@@ -46,12 +46,12 @@
                             <span class="label-text">Password</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <input name="password" type="text" placeholder="" value="12345"
-                            class="input-bordered input w-full max-w-full" readonly />
+                        <input name="password" type="password" placeholder="" value="{{ old('password') }}"
+                            class="input-bordered input w-full max-w-full" />
                         <label class="label">
                             <span class="label-text-alt"></span>
                             <span class="label-text-alt text-red-600">
-                                You can change it by your self when loged in
+                                biarkan kosong jika tidak ingin ganti password
                             </span>
                         </label>
                     </div>
@@ -61,10 +61,10 @@
                             <span class="label-text-alt"></span>
                         </label>
                         <select class="select-bordered select" name="jabatan">
-                            <option disabled selected>Pick one</option>
-                            <option value="admin">Admin</option>
-                            <option value="manajer">Manajer</option>
-                            <option value="staff">Staff</option>
+                            <option disabled>Pick one</option>
+                            <option @if ($item->jabatan == 'admin') selected @endif value="admin">Admin</option>
+                            <option @if ($item->jabatan == 'manajer') selected @endif value="manajer">Manajer</option>
+                            <option @if ($item->jabatan == 'staff') selected @endif value="staff">Staff</option>
 
                         </select>
                         <label class="label">

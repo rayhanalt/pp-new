@@ -17,6 +17,7 @@
                 <th></th>
                 <th>NIP</th>
                 <th>Nama</th>
+                <th>Jabatan</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -27,6 +28,7 @@
                         <th>{{ $loop->iteration + $data->FirstItem() - 1 }}</th>
                         <td>{{ $item->nip }}</td>
                         <td>{{ $item->nama }}</td>
+                        <td>{{ $item->getUser->jabatan }}</td>
                         <td>
                             <a href="/pegawai/{{ $item->nip }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
                                 ✎
@@ -39,6 +41,7 @@
                         <th>{{ $loop->iteration + $data->FirstItem() - 1 }}</th>
                         <td>{{ $item->nip }}</td>
                         <td>{{ $item->nama }}</td>
+                        <td>{{ $item->getUser->jabatan }}</td>
                         <td>
                             <a href="/pegawai/{{ $item->nip }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
                                 ✎
