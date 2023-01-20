@@ -92,10 +92,24 @@ class PegawaiController extends Controller
      */
     public function edit(Pegawai $pegawai)
     {
-        return view('pegawai.edit', [
-            'item' => $pegawai,
-            'pegawai' => Pegawai::get(),
-        ]);
+        if (Auth::user()->jabatan != 'staff' && Auth::user()->nip != $pegawai->nip) {
+            return view('pegawai.edit', [
+                'item' => $pegawai,
+                'pegawai' => Pegawai::get(),
+            ]);
+        } elseif (Auth::user()->jabatan != 'staff' && Auth::user()->nip == $pegawai->nip) {
+            return view('pegawai.edit', [
+                'item' => $pegawai,
+                'pegawai' => Pegawai::get(),
+            ]);
+        } elseif (Auth::user()->jabatan == 'staff' && Auth::user()->nip == $pegawai->nip) {
+            return view('pegawai.edit', [
+                'item' => $pegawai,
+                'pegawai' => Pegawai::get(),
+            ]);
+        } elseif (Auth::user()->jabatan == 'staff' && Auth::user()->nip != $pegawai->nip) {
+            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Edit Pegawai Lain.');
+        }
     }
 
     /**

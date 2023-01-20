@@ -35,8 +35,8 @@
                         </g>
                     </svg>
                 </div>
-                <div class="stat-title">Jumlah Data Mobil</div>
-                {{-- <div class="stat-value">{{ $mobil }}</div> --}}
+                <div class="stat-title">Jumlah Data Pegawai</div>
+                <div class="stat-value">{{ $pegawai }}</div>
             </div>
 
             <div class="stat">
