@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Bidang;
 use App\Models\Pegawai;
+use App\Models\Proyek;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,9 @@ class PegawaiController extends Controller
     public function create()
     {
         if (Auth::user()->jabatan != 'staff') {
-            return view('pegawai.create');
+            return view('pegawai.create', [
+                'getBidang' => Bidang::get(),
+            ]);
         } elseif (Auth::user()->jabatan == 'staff') {
             return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
         }
@@ -57,6 +60,7 @@ class PegawaiController extends Controller
             $validasiPegawai = $request->validate([
                 'nip' => 'required|numeric|unique:pegawai,nip',
                 'nama' => 'required',
+                'kode_bidang' => 'required'
             ]);
 
             pegawai::create($validasiPegawai);
@@ -96,16 +100,19 @@ class PegawaiController extends Controller
             return view('pegawai.edit', [
                 'item' => $pegawai,
                 'pegawai' => Pegawai::get(),
+                'getBidang' => Bidang::get(),
             ]);
         } elseif (Auth::user()->jabatan != 'staff' && Auth::user()->nip == $pegawai->nip) {
             return view('pegawai.edit', [
                 'item' => $pegawai,
                 'pegawai' => Pegawai::get(),
+                'getBidang' => Bidang::get(),
             ]);
         } elseif (Auth::user()->jabatan == 'staff' && Auth::user()->nip == $pegawai->nip) {
             return view('pegawai.edit', [
                 'item' => $pegawai,
                 'pegawai' => Pegawai::get(),
+                'getBidang' => Bidang::get(),
             ]);
         } elseif (Auth::user()->jabatan == 'staff' && Auth::user()->nip != $pegawai->nip) {
             return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Edit Pegawai Lain.');
@@ -122,11 +129,13 @@ class PegawaiController extends Controller
     public function update(Request $request, Pegawai $pegawai)
     {
         $rules = [
-            'nama' => 'required'
+            'nama' => 'required',
+            'kode_bidang' => 'required'
         ];
 
         if ($request->nip != $pegawai->nip) {
             $rules['nip'] = 'required|numeric|unique:pegawai,nip';
+            Proyek::where('nip', $pegawai->nip)->update(['nip' => $request->nip]);
         }
 
         if (Auth::user()->nip == $pegawai->nip) {
@@ -193,6 +202,7 @@ class PegawaiController extends Controller
 
                 $pegawai->update($validasi);
             }
+
             return redirect('/pegawai')->with('success', 'Data has been updated!')->withInput();
         }
     }
@@ -205,10 +215,13 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
-        AuthUser::where('nip', $pegawai->nip)->delete();
-        $pegawai->delete();
-
-
-        return redirect()->back()->with('success', 'Data has been deleted!');
+        $proyek = Proyek::where('nip', $pegawai->nip);
+        if ($proyek->count() > 0) {
+            return redirect()->back()->with('failed', '(' . $pegawai->nama . ') masih penanggung jawab dalam salah satu proyek');
+        } else {
+            AuthUser::where('nip', $pegawai->nip)->delete();
+            $pegawai->delete();
+            return redirect()->back()->with('success', 'Data has been deleted!');
+        }
     }
 }

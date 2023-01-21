@@ -18,6 +18,7 @@
                 <th>NIP</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
+                <th>Bidang</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -29,6 +30,7 @@
                         <td>{{ $item->nip }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->getUser->jabatan }}</td>
+                        <td>{{ $item->getBidang->nama_bidang }}</td>
                         <td>
                             <a href="/pegawai/{{ $item->nip }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
                                 ✎
@@ -42,6 +44,7 @@
                         <td>{{ $item->nip }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->getUser->jabatan }}</td>
+                        <td>{{ $item->getBidang->nama_bidang }}</td>
                         <td>
                             <a href="/pegawai/{{ $item->nip }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
                                 ✎

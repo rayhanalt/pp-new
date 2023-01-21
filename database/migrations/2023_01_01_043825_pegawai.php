@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('nama');
             // $table->text('alamat');
             // $table->char('no_telp');
-            // $table->string('kode_bidang');
+            $table->string('kode_bidang');
             // $table->string('email')->unique();
             $table->timestamps();
         });

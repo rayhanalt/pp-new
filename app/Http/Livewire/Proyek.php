@@ -19,17 +19,19 @@ class Proyek extends Component
     ];
     public function render()
     {
-        return view('livewire.rental', [
+        return view('livewire.proyek', [
             'data' => $this->search === null ?
-                ModelsProyek::with('getMobil', 'getCustomer')->orderBy('id', 'desc')->Paginate(3)->withQueryString() :
-                ModelsProyek::with('getMobil', 'getCustomer')->orderBy('id', 'desc')
-                ->where('kode_rental', 'like', '%' . $this->search . '%')
-                ->orWhere('nik', 'like', '%' . $this->search . '%')
-                ->orWhere('nopol', 'like', '%' . $this->search . '%')
-                ->orWhere('tanggal_rental', 'like', '%' . $this->search . '%')
-                ->orWhere('tanggal_kembali', 'like', '%' . $this->search . '%')
-                ->orWhere('durasi', 'like', '%' . $this->search . '%')
-                ->orWhere('total_harga', 'like', '%' . $this->search . '%')
+                ModelsProyek::with('getPegawai')->orderBy('id', 'desc')->Paginate(3)->withQueryString() :
+                ModelsProyek::with('getPegawai')->orderBy('id', 'desc')
+                ->where('kode_proyek', 'like', '%' . $this->search . '%')
+                ->orWhere('nip', 'like', '%' . $this->search . '%')
+                ->orWhere('tgl_mulai', 'like', '%' . $this->search . '%')
+                ->orWhere('tgl_selesai', 'like', '%' . $this->search . '%')
+                ->orWhere('tgl_dibuat', 'like', '%' . $this->search . '%')
+                ->orWhere('nama_mitra', 'like', '%' . $this->search . '%')
+                ->orWhereHas('getPegawai', function ($query) {
+                    $query->where('nama', 'like', '%' . $this->search . '%');
+                })
                 ->paginate(3)->withQueryString()
         ]);
     }

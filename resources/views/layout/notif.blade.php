@@ -3,3 +3,8 @@
         {{ session('success') }}
     </button>
 @endif
+@if (session()->has('failed'))
+    <button class="btn-error btn-sm btn">
+        {{ session('failed') }}
+    </button>
+@endif

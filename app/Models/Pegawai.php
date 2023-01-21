@@ -20,12 +20,12 @@ class Pegawai extends Model
     {
         return $this->hasMany(Proyek::class, 'nip', 'nip');
     }
-    public function haveBidang()
-    {
-        return $this->hasMany(Bidang::class, 'nip', 'nip');
-    }
 
     // BelongsTo
+    public function getBidang()
+    {
+        return $this->belongsTo(Bidang::class, 'kode_bidang', 'kode_bidang');
+    }
     public function getUser()
     {
         return $this->belongsTo(User::class, 'nip', 'nip');

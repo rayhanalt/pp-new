@@ -13,7 +13,7 @@
     </div>
     <div data-aos-duration="800" data-aos="fade-down" class="flex-2 mr-3">
         <span class="btn-ghost btn text-sm normal-case">{{ auth()->user()->hasPegawai->nama }} |
-            {{ auth()->user()->jabatan }}
+            {{ auth()->user()->jabatan }} | {{ auth()->user()->hasPegawai->getBidang->nama_bidang }}
             @if (session()->has('error'))
                 | {{ session('error') }}
             @endif

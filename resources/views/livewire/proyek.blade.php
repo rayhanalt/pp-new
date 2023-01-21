@@ -1,7 +1,7 @@
 <div>
     <div class="fixed top-[72px] bottom-2 right-2 left-2 flex flex-grow justify-between">
         <div>
-            <a href="/rental/create" class="btn-outline btn-success btn-sm btn">➕ Data</a>
+            <a href="/proyek/create" class="btn-outline btn-success btn-sm btn">➕ Data</a>
         </div>
         <div>
             @include('layout.notif')
@@ -16,14 +16,13 @@
         <thead>
             <tr>
                 <th></th>
-                {{-- <th>Kode</th> --}}
-                <th>Kode Rental</th>
-                <th>Customer</th>
-                <th>Nopol Mobil</th>
-                <th>Tanggal Rental</th>
-                <th>Tanggal Kembali</th>
-                <th>Durasi</th>
-                <th>Total Harga</th>
+                <th>Kode Proyek</th>
+                <th>Nama Proyek</th>
+                <th>Penanggung Jawab</th>
+                <th>Tanggal Mulai</th>
+                <th>Tanggal Selesai</th>
+                <th>Tanggal Dibuat</th>
+                <th>Nama Mitra</th>
                 <th>action</th>
             </tr>
         </thead>
@@ -31,23 +30,22 @@
             @foreach ($data as $item)
                 <tr>
                     <th>{{ $loop->iteration + $data->FirstItem() - 1 }}</th>
-                    {{-- <td>{{ $item->kode_mobil }}</td> --}}
-                    <td>{{ $item->kode_rental }}</td>
-                    <td>{{ $item->getCustomer->nama }}</td>
-                    <td>{{ $item->nopol }}</td>
-                    <td>{{ date('d F Y', strtotime($item->tanggal_rental)) }}</td>
-                    <td>{{ date('d F Y', strtotime($item->tanggal_kembali)) }}</td>
-                    <td>{{ $item->durasi }} Hari</td>
-                    <td>{{ 'Rp. ' . number_format($item->total_harga, 0, ',', '.') }}</td>
+                    <td>{{ $item->kode_proyek }}</td>
+                    <td>{{ $item->nama_proyek }}</td>
+                    <td>{{ $item->getPegawai->nama }} | {{ $item->getPegawai->getUser->jabatan }}</td>
+                    <td>{{ date('d F Y', strtotime($item->tgl_mulai)) }}</td>
+                    <td>{{ date('d F Y', strtotime($item->tgl_selesai)) }}</td>
+                    <td>{{ date('d F Y', strtotime($item->tgl_dibuat)) }}</td>
+                    <td>{{ $item->nama_mitra }}</td>
                     <td>
-                        <a href="/rental/{{ $item->kode_rental }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
+                        <a href="/proyek/{{ $item->kode_proyek }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
                             ✎
                         </a>
-                        <form action="/rental/{{ $item->kode_rental }}" method="POST">
+                        <form action="/proyek/{{ $item->kode_proyek }}" method="POST">
                             @method('delete')
                             @csrf
                             <button class="btn-outline btn-error btn-sm btn"
-                                onclick="return confirm('yakin hapus data {{ $item->kode_rental }} ?')">
+                                onclick="return confirm('yakin hapus data {{ $item->nama_proyek }} ?')">
                                 🗑
                             </button>
                         </form>

@@ -20,9 +20,12 @@ class Pegawai extends Component
     {
         return view('livewire.pegawai', [
             "data" => $this->search === null ?
-                ModelsPegawai::orderBy('id', 'desc')->paginate(3)->withQueryString() :
-                ModelsPegawai::orderBy('id', 'desc')->where('nama', 'like', '%' . $this->search . '%')
+                ModelsPegawai::with('getBidang')->orderBy('id', 'desc')->paginate(3)->withQueryString() :
+                ModelsPegawai::with('getBidang')->orderBy('id', 'desc')->where('nama', 'like', '%' . $this->search . '%')
                 ->orWhere('nip', 'like', '%' . $this->search . '%')
+                ->orWhereHas('getBidang', function ($query) {
+                    $query->where('nama_bidang', 'like', '%' . $this->search . '%');
+                })
                 ->paginate(3)->withQueryString()
         ]);
     }

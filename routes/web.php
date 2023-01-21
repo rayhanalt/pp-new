@@ -1,11 +1,9 @@
 <?php
 
-use App\Models\Denda;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DendaController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MobilController;
-use App\Http\Controllers\RentalController;
+use App\Http\Controllers\BidangController;
+use App\Http\Controllers\ProyekController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DashboardController;
 
@@ -38,8 +36,11 @@ Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 // Pegawai
 Route::resource('/pegawai', PegawaiController::class)->except('show')->middleware('auth');
 
-// Rental
-// Route::resource('/rental', RentalController::class)->except('show')->middleware('auth');
+// Proyek
+Route::resource('/proyek', ProyekController::class)->except('show')->middleware('auth');
+
+// Bidang
+Route::resource('/bidang', BidangController::class)->except('show')->middleware('auth');
 
 // Denda
 // Route::resource('/denda', DendaController::class)->except('show')->middleware('auth');

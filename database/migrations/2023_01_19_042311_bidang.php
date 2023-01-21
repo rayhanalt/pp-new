@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('bidang', function (Blueprint $table) {
             $table->id();
             $table->string('kode_bidang')->unique();
-            $table->bigInteger('nama_bidang');
+            $table->string('nama_bidang');
             $table->timestamps();
         });
     }

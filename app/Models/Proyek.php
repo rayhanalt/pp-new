@@ -52,13 +52,15 @@ class Proyek extends Model
     }
 
     // Validasi
-    public function validateRental($request)
+    public function validateProyek($request)
     {
         $rules = [
-            'nik' => 'required',
-            'nopol' => 'required',
-            'tanggal_rental' => 'required|date|before:tanggal_kembali',
-            'tanggal_kembali' => 'required|date|after:tanggal_rental',
+            'nip' => 'required',
+            'nama_proyek' => 'required',
+            'tgl_mulai' => 'required|date|before:tgl_selesai',
+            'tgl_selesai' => 'required|date|after:tgl_mulai',
+            'tgl_dibuat' => 'required|date',
+            'nama_mitra' => 'required',
         ];
 
         $request->validate($rules);

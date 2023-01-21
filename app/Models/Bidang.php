@@ -25,9 +25,9 @@ class Bidang extends Model
             }
         );
     }
-    //  BelongsTo
-    public function getPegawai()
+    //  HasMany
+    public function havePegawai()
     {
-        return $this->belongsTo(Pegawai::class, 'nip', 'nip');
+        return $this->hasMany(Pegawai::class, 'kode_bidang', 'kode_bidang');
     }
 }
