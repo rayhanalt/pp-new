@@ -20,7 +20,7 @@ class BidangController extends Controller
         if (Auth::user()->jabatan != 'staff') {
             return view('bidang.index');
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 
@@ -34,7 +34,7 @@ class BidangController extends Controller
         if (Auth::user()->jabatan != 'staff') {
             return view('bidang.create');
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 
@@ -54,7 +54,7 @@ class BidangController extends Controller
 
             return redirect('/bidang')->with('success', 'New Data has been added!')->withInput();
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 
@@ -82,7 +82,7 @@ class BidangController extends Controller
                 'item' => $bidang
             ]);
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 
@@ -104,7 +104,7 @@ class BidangController extends Controller
             $bidang->update($validasi);
             return redirect('/bidang')->with('success', 'Data has been updated!')->withInput();
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 
@@ -125,7 +125,7 @@ class BidangController extends Controller
                 return redirect()->back()->with('success', 'Data has been deleted!');
             }
         } elseif (Auth::user()->jabatan == 'staff') {
-            return redirect()->back()->with('error', 'Anda tidak memiliki akses untuk halaman Pegawai.');
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Bidang.');
         }
     }
 }

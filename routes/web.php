@@ -6,6 +6,7 @@ use App\Http\Controllers\BidangController;
 use App\Http\Controllers\ProyekController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PekerjaProyekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,8 +31,10 @@ Route::get('/loginpage', function () {
 
 // Dashboard
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
-// Mobil
-// Route::resource('/mobil', MobilController::class)->except('show')->middleware('auth');
+
+// Pekerja Proyek
+Route::resource('/pekerjaProyek', PekerjaProyekController::class)->except('show')->middleware('auth');
+
 
 // Pegawai
 Route::resource('/pegawai', PegawaiController::class)->except('show')->middleware('auth');

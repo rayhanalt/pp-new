@@ -20,6 +20,10 @@ class Pegawai extends Model
     {
         return $this->hasMany(Proyek::class, 'nip', 'nip');
     }
+    public function haveTimProyek()
+    {
+        return $this->hasMany(PekerjaProyek::class, 'nip', 'nip');
+    }
 
     // BelongsTo
     public function getBidang()

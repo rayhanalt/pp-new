@@ -3,6 +3,7 @@
     <div class="mt-20 flex place-content-center lg:mt-0">
         <div class="stats stats-vertical m-auto h-auto shadow-lg shadow-black ring-1 ring-slate-400 lg:stats-horizontal xl:stats-horizontal"
             data-aos="zoom-out" data-aos-duration="500">
+
             <div class="stat">
                 <div class="stat-figure text-secondary">
 

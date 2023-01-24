@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pegawai;
 use App\Models\Proyek;
-use Carbon\Carbon;
+use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProyekController extends Controller
 {
@@ -16,7 +16,11 @@ class ProyekController extends Controller
      */
     public function index()
     {
-        return view('proyek.index');
+        if (Auth::user()->jabatan != 'staff') {
+            return view('proyek.index');
+        } elseif (Auth::user()->jabatan == 'staff') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Proyek.');
+        }
     }
 
     /**
@@ -26,15 +30,19 @@ class ProyekController extends Controller
      */
     public function create()
     {
-        return view('proyek.create', [
-            'getPegawai' => Pegawai::get()
-        ]);
+        if (Auth::user()->jabatan != 'staff') {
+            return view('proyek.create', [
+                'getPegawai' => Pegawai::get()
+            ]);
+        } elseif (Auth::user()->jabatan == 'staff') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Proyek.');
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRentalRequest  $request
+     * @param  \App\Http\Requests\StoreProyekRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Proyek $proyek)
@@ -48,7 +56,7 @@ class ProyekController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Rental  $rental
+     * @param  \App\Models\Proyek  $proyek
      * @return \Illuminate\Http\Response
      */
     public function show(Rental $rental)
@@ -59,22 +67,26 @@ class ProyekController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Rental  $rental
+     * @param  \App\Models\Proyek  $proyek
      * @return \Illuminate\Http\Response
      */
     public function edit(Proyek $proyek)
     {
-        return view('proyek.edit', [
-            'item' => $proyek,
-            'getPegawai' => Pegawai::get(),
-        ]);
+        if (Auth::user()->jabatan != 'staff') {
+            return view('proyek.edit', [
+                'item' => $proyek,
+                'getPegawai' => Pegawai::get(),
+            ]);
+        } elseif (Auth::user()->jabatan == 'staff') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Proyek.');
+        }
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRentalRequest  $request
-     * @param  \App\Models\Rental  $rental
+     * @param  \App\Http\Requests\UpdateProyekRequest  $request
+     * @param  \App\Models\Proyek  $proyek
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Proyek $proyek)

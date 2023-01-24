@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     {{-- drawer --}}
     <div class="drawer">
         <input id="my-drawer" type="checkbox" class="drawer-toggle" />
@@ -22,7 +23,16 @@
             {{-- content --}}
             <div class="flex w-full flex-col">
                 <div class="card rounded-box ml-2 mr-2 mt-2 grid h-full place-items-stretch lg:h-[530px]">
+                    {{-- yield content --}}
                     @yield('content')
+                    {{-- Notif hak akses --}}
+                    <div class="fixed bottom-14 left-0 right-0 m-auto flex h-12 w-full items-center justify-center">
+                        @if (session()->has('error'))
+                            <button class="btn-error btn-xs btn">
+                                {{ session('error') }}
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
             {{-- end content --}}
@@ -40,7 +50,7 @@
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
-                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
                     <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
@@ -50,7 +60,7 @@
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
-                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
                             Profil</a></li>

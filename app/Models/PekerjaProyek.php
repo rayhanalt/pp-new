@@ -39,62 +39,55 @@ class PekerjaProyek extends Model
     public static function createValidate($request)
     {
         return $request->validate([
-            'nopol' => 'required|unique:mobil,nopol',
-            'merk' => 'required',
-            'model' => 'required',
-            'tahun' => 'required',
-            'warna' => 'required',
-            'harga_sewa' => 'required',
-            'gambar' => 'required|image|file|max:2048',
+            'kode_proyek' => 'required',
+            'nip' => 'required',
         ]);
     }
-    public static function createNew($validatedData, $request)
-    {
-        // Mendapatkan file gambar yang diupload
-        $validatedData['gambar'] = $request->file('gambar');
+    // public static function createNew($validatedData, $request)
+    // {
+    //     // Mendapatkan file gambar yang diupload
+    //     $validatedData['gambar'] = $request->file('gambar');
 
-        // Menyimpan file ke direktori public/gambar
-        $fileName = uniqid() . '.' . $validatedData['gambar']->getClientOriginalExtension();
-        $validatedData['gambar']->move(public_path('gambar'), $fileName);
-        $validatedData['gambar'] = $fileName;
-        self::create($validatedData);
-    }
+    //     // Menyimpan file ke direktori public/gambar
+    //     $fileName = uniqid() . '.' . $validatedData['gambar']->getClientOriginalExtension();
+    //     $validatedData['gambar']->move(public_path('gambar'), $fileName);
+    //     $validatedData['gambar'] = $fileName;
+    //     self::create($validatedData);
+    // }
+
 
     public static function updateValidate($request)
     {
+
         return $request->validate([
-            'merk' => 'required',
-            'model' => 'required',
-            'tahun' => 'required',
-            'warna' => 'required',
-            'harga_sewa' => 'required',
-            'gambar' => 'image|file|max:2048',
+            'kode_proyek' => 'required',
+            'nip' => 'required',
         ]);
     }
 
-    public static function updateData($mobil, $validatedData, $request)
-    {
-        // simpan gambar
-        if ($request->file('gambar')) {
-            // menghapus gambar sebelumnya
-            if ($mobil->gambar) {
-                File::delete(public_path('gambar/' . $mobil->gambar));
-            }
-            // memindahkan gambar ke public/gambar
-            $validatedData['gambar'] = $request->file('gambar');
+    // public static function updateData($mobil, $validatedData, $request)
+    // {
+    //     // simpan gambar
+    //     if ($request->file('gambar')) {
+    //         // menghapus gambar sebelumnya
+    //         if ($mobil->gambar) {
+    //             File::delete(public_path('gambar/' . $mobil->gambar));
+    //         }
+    //         // memindahkan gambar ke public/gambar
+    //         $validatedData['gambar'] = $request->file('gambar');
 
-            // membuat filename random
-            $fileName = uniqid() . '.' . $validatedData['gambar']->getClientOriginalExtension();
-            $validatedData['gambar']->move(public_path('gambar'), $fileName);
-            $validatedData['gambar'] = $fileName;
-        }
-        // validasi nopol jika berbeda dengan database
-        if ($request->nopol != $mobil->nopol) {
-            $validatedData = $request->validate(['nopol' => 'required|unique:mobil,nopol']);
-            $nopol = $validatedData['nopol'];
-        }
-        //validasi nopol jika berbeda dengan database
-        $validatedData['nopol'] = $request->nopol != $mobil->nopol ? $nopol : $request->nopol;
-        $mobil->update($validatedData);
-    }
+    //         // membuat filename random
+    //         $fileName = uniqid() . '.' . $validatedData['gambar']->getClientOriginalExtension();
+    //         $validatedData['gambar']->move(public_path('gambar'), $fileName);
+    //         $validatedData['gambar'] = $fileName;
+    //     }
+    //     // validasi nopol jika berbeda dengan database
+    //     if ($request->nopol != $mobil->nopol) {
+    //         $validatedData = $request->validate(['nopol' => 'required|unique:mobil,nopol']);
+    //         $nopol = $validatedData['nopol'];
+    //     }
+    //     //validasi nopol jika berbeda dengan database
+    //     $validatedData['nopol'] = $request->nopol != $mobil->nopol ? $nopol : $request->nopol;
+    //     $mobil->update($validatedData);
+    // }
 }
