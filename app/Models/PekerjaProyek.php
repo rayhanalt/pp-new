@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class PekerjaProyek extends Model
 {
@@ -36,13 +37,13 @@ class PekerjaProyek extends Model
         return $this->belongsTo(Proyek::class, 'kode_proyek', 'kode_proyek');
     }
 
-    public static function createValidate($request)
-    {
-        return $request->validate([
-            'kode_proyek' => 'required',
-            'nip' => 'required',
-        ]);
-    }
+    // public static function createValidate($request)
+    // {
+    //     return $request->validate([
+    //         'kode_proyek' => 'required',
+    //         'nip' => 'required',
+    //     ]);
+    // }
     // public static function createNew($validatedData, $request)
     // {
     //     // Mendapatkan file gambar yang diupload
@@ -56,14 +57,17 @@ class PekerjaProyek extends Model
     // }
 
 
-    public static function updateValidate($request)
-    {
+    // public static function updateValidate($request)
+    // {
 
-        return $request->validate([
-            'kode_proyek' => 'required',
-            'nip' => 'required',
-        ]);
-    }
+    //     return $request->validate([
+    //         'kode_proyek' => 'required',
+    //         Rule::unique('nip')
+    //             ->where(function ($query) {
+    //                 return $query->where('kode_proyek', request('kode_proyek'));
+    //             }),
+    //     ]);
+    // }
 
     // public static function updateData($mobil, $validatedData, $request)
     // {

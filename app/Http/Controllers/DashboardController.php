@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
-
+use App\Models\PengadaanBarang;
+use App\Models\Proyek;
 
 class DashboardController extends Controller
 {
@@ -11,8 +12,8 @@ class DashboardController extends Controller
     {
         return view('dashboard', [
             'pegawai' => Pegawai::count(),
-            // 'customer' => Customer::count(),
-            // 'rental' => Rental::count(),
+            'proyek' => Proyek::count(),
+            'pengadaanBarang' => PengadaanBarang::count(),
         ]);
     }
 }

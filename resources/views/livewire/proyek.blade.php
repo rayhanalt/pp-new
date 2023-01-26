@@ -1,7 +1,7 @@
 <div>
     <div class="fixed top-[72px] bottom-2 right-2 left-2 flex flex-grow justify-between">
         <div>
-            <a href="/proyek/create" class="btn-outline btn-success btn-sm btn">➕ Data</a>
+            <a href="/proyek/create" class="btn-success btn-outline btn-sm btn">➕ Data</a>
         </div>
         <div>
             @include('layout.notif')
@@ -38,17 +38,24 @@
                     <td>{{ date('d F Y', strtotime($item->tgl_dibuat)) }}</td>
                     <td>{{ $item->nama_mitra }}</td>
                     <td>
-                        <a href="/proyek/{{ $item->kode_proyek }}/edit" class="btn-outline btn-accent btn-sm btn mb-1">
+                        <a href="/proyek/{{ $item->kode_proyek }}/edit" class="btn-accent btn-outline btn-sm btn mb-1">
                             ✎
                         </a>
                         <form action="/proyek/{{ $item->kode_proyek }}" method="POST">
                             @method('delete')
                             @csrf
-                            <button class="btn-outline btn-error btn-sm btn"
+                            <button class="btn-outline btn-error btn-sm btn mb-1"
                                 onclick="return confirm('yakin hapus data {{ $item->nama_proyek }} ?')">
                                 🗑
                             </button>
                         </form>
+                        <div class="tooltip tooltip-left hover:tooltip-open"
+                            data-tip="Lihat Anggota Tim Proyek {{ $item->nama_proyek }}">
+                            <a href="/proyek/{{ $item->kode_proyek }}" wire:click="show({{ $item->kode_proyek }})"
+                                class="btn-info btn-outline btn-sm btn">
+                                👁
+                            </a>
+                        </div>
                     </td>
                 </tr>
             @endforeach

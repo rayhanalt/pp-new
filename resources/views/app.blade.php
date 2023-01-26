@@ -50,7 +50,6 @@
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
-                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
                     <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
@@ -60,7 +59,6 @@
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
-                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
                             Profil</a></li>

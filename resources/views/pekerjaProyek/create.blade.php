@@ -13,14 +13,10 @@
                             <span class="label-text">Proyek</span>
                             <span class="label-text-alt"></span>
                         </label>
-                        <select class="select-bordered select" id="kode_proyek" name="kode_proyek">
-                            <option disabled selected>Pick one</option>
-                            @foreach ($getProyek as $proyek)
-                                <option value="{{ $proyek->kode_proyek }}"
-                                    {{ old('kode_proyek') == $proyek->kode_proyek ? 'selected' : '' }}>
-                                    {{ $proyek->nama_proyek }} | {{ $proyek->kode_proyek }}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" disabled readonly
+                            value="{{ $getProyek->kode_proyek }} | {{ $getProyek->nama_proyek }}"
+                            class="input-bordered input w-full max-w-full" />
+                        <input type="hidden" name="kode_proyek" value="{{ $getProyek->kode_proyek }}">
                         <label class="label">
                             <span class="label-text-alt"></span>
                             <span class="label-text-alt text-red-600">

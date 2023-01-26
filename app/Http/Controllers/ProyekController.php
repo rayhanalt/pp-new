@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proyek;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use App\Models\PekerjaProyek;
 use Illuminate\Support\Facades\Auth;
 
 class ProyekController extends Controller
@@ -59,9 +60,12 @@ class ProyekController extends Controller
      * @param  \App\Models\Proyek  $proyek
      * @return \Illuminate\Http\Response
      */
-    public function show(Rental $rental)
+    public function show(Proyek $proyek)
     {
-        //
+        return view('pekerjaProyek.show', [
+            'item' => $proyek,
+            'data' => PekerjaProyek::where('kode_proyek', $proyek->kode_proyek)->get()
+        ]);
     }
 
     /**
@@ -106,6 +110,7 @@ class ProyekController extends Controller
      */
     public function destroy(Proyek $proyek)
     {
+        PekerjaProyek::where('kode_proyek', $proyek->kode_proyek)->delete();
         $proyek->delete();
 
         return redirect()->back()->with('success', 'Data has been deleted!');
