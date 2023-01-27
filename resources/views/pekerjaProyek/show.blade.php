@@ -3,13 +3,14 @@
     <div>
         <div class="fixed top-[72px] bottom-2 right-2 left-2 flex flex-grow justify-between">
             <div>
-                <a href="/pekerjaProyek/create/{{ $item->kode_proyek }}" class="btn-success btn-outline btn-sm btn">➕ Data</a>
+                <a href="/pekerjaProyek/create/{{ $item->kode_proyek }}" class="btn-outline btn-success btn-sm btn mr-2">➕
+                    Data</a>
             </div>
             <div>
                 @include('layout.notif')
             </div>
             <div>
-                <span class="btn-ghost btn-sm btn">{{ $item->nama_proyek }} | {{ $item->getPegawai->nama }}</span>
+                <span class="btn-ghost btn-sm btn ml-2">{{ $item->nama_proyek }} | {{ $item->getPegawai->nama }}</span>
             </div>
         </div>
         <table class="mt-10 table w-full">

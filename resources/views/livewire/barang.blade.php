@@ -1,13 +1,13 @@
 <div>
     <div class="fixed top-[72px] bottom-2 right-2 left-2 flex flex-grow justify-between">
         <div>
-            <a href="/denda/create" class="btn-outline btn-success btn-sm btn">➕ Data</a>
+            <a href="/denda/create" class="btn-outline btn-success btn-sm btn mr-2">➕ Data</a>
         </div>
         <div>
             @include('layout.notif')
         </div>
         <div>
-            <input wire:model="search" type="text" class="input-info input input-sm"
+            <input wire:model="search" type="text" class="input-info input input-sm ml-2"
                 placeholder="Search, if date: 'Y-m-d'">
         </div>
     </div>
@@ -62,10 +62,10 @@
     <div class="fixed bottom-28 left-0 right-0">
         <div class="btn-group mx-auto grid w-fit grid-cols-2">
             <button wire:click="previousPage" @if ($data->onFirstPage()) disabled @endif
-                class="btn-outline btn-sm btn">previous</button>
+                class="btn-outline btn btn-sm">previous</button>
 
             <button wire:click="nextPage" @if (!$data->hasMorePages()) disabled @endif
-                class="btn-outline btn-sm btn">next</button>
+                class="btn-outline btn btn-sm">next</button>
         </div>
     </div>
 </div>

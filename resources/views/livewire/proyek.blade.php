@@ -1,13 +1,13 @@
 <div>
     <div class="fixed top-[72px] bottom-2 right-2 left-2 flex flex-grow justify-between">
         <div>
-            <a href="/proyek/create" class="btn-success btn-outline btn-sm btn">➕ Data</a>
+            <a href="/proyek/create" class="btn-outline btn btn-success btn-sm mr-2">➕ Data</a>
         </div>
         <div>
             @include('layout.notif')
         </div>
         <div>
-            <input wire:model="search" type="text" class="input-info input input-sm"
+            <input wire:model="search" type="text" class="input-info input input-sm ml-2"
                 placeholder="Search, if date: 'Y-m-d'">
         </div>
     </div>
@@ -38,13 +38,13 @@
                     <td>{{ date('d F Y', strtotime($item->tgl_dibuat)) }}</td>
                     <td>{{ $item->nama_mitra }}</td>
                     <td>
-                        <a href="/proyek/{{ $item->kode_proyek }}/edit" class="btn-accent btn-outline btn-sm btn mb-1">
+                        <a href="/proyek/{{ $item->kode_proyek }}/edit" class="btn-outline btn btn-accent btn-sm mb-1">
                             ✎
                         </a>
                         <form action="/proyek/{{ $item->kode_proyek }}" method="POST">
                             @method('delete')
                             @csrf
-                            <button class="btn-outline btn-error btn-sm btn mb-1"
+                            <button class="btn-outline btn btn-error btn-sm mb-1"
                                 onclick="return confirm('yakin hapus data {{ $item->nama_proyek }} ?')">
                                 🗑
                             </button>
@@ -52,7 +52,7 @@
                         <div class="tooltip tooltip-left hover:tooltip-open"
                             data-tip="Lihat Anggota Tim Proyek {{ $item->nama_proyek }}">
                             <a href="/proyek/{{ $item->kode_proyek }}" wire:click="show({{ $item->kode_proyek }})"
-                                class="btn-info btn-outline btn-sm btn">
+                                class="btn-outline btn btn-info btn-sm">
                                 👁
                             </a>
                         </div>
@@ -64,10 +64,10 @@
     <div class="fixed bottom-28 left-0 right-0">
         <div class="btn-group mx-auto grid w-fit grid-cols-2">
             <button wire:click="previousPage" @if ($data->onFirstPage()) disabled @endif
-                class="btn-outline btn-sm btn">previous</button>
+                class="btn-outline btn btn-sm">previous</button>
 
             <button wire:click="nextPage" @if (!$data->hasMorePages()) disabled @endif
-                class="btn-outline btn-sm btn">next</button>
+                class="btn-outline btn btn-sm">next</button>
         </div>
     </div>
 </div>
