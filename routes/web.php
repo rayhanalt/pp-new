@@ -33,7 +33,7 @@ Route::get('/loginpage', function () {
 Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 // Pekerja Proyek
-Route::resource('/pekerjaProyek', PekerjaProyekController::class)->except('create', 'edit', 'update', 'index', 'show')->middleware('auth');
+Route::resource('/pekerjaProyek', PekerjaProyekController::class)->except('create', 'edit', 'update', 'show')->middleware('auth');
 Route::controller(PekerjaProyekController::class)->group(function () {
     Route::get('pekerjaProyek/create/{proyek}', 'customCreate')->middleware('auth');
 });

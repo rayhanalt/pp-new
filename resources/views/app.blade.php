@@ -28,7 +28,7 @@
                     {{-- Notif hak akses --}}
                     <div class="fixed bottom-14 left-0 right-0 m-auto flex h-12 w-full items-center justify-center">
                         @if (session()->has('error'))
-                            <button class="btn-error btn-xs btn">
+                            <button class="btn-error btn btn-xs">
                                 {{ session('error') }}
                             </button>
                         @endif
@@ -50,24 +50,26 @@
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
+                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
-                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn btn-secondary">Ubah
                             Profil</a></li>
                 @endcan
                 @can('admin')
                     <li><a href="/proyek">Proyek</a></li>
                     <li><a href="/bidang">Bidang</a></li>
                     <li><a href="/pegawai">Pegawai</a></li>
+                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
-                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn btn-secondary">Ubah
                             Profil</a></li>
                 @endcan
                 @can('staff')
-                    <li><a href="/timproyek">Tim Proyek</a></li>
+                    <li><a href="/pekerjaProyek">Tim Proyek</a></li>
                     <li><a href="/barang">Pengadaan Barang</a></li>
                     <li><a href="/perkembangan">Perkembangan Proyek</a></li>
-                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn-secondary btn">Ubah
+                    <li><a href="/pegawai/{{ auth()->user()->nip }}/edit" class="btn-outline btn btn-secondary">Ubah
                             Profil</a></li>
                 @endcan
             </ul>

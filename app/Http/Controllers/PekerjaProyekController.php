@@ -6,6 +6,7 @@ use App\Models\Proyek;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 use App\Models\PekerjaProyek;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PekerjaProyekController extends Controller
@@ -32,10 +33,14 @@ class PekerjaProyekController extends Controller
 
     public function customCreate(Proyek $proyek)
     {
-        return view('pekerjaProyek.create', [
-            'getPegawai' => Pegawai::get(),
-            'getProyek' => $proyek,
-        ]);
+        if (Auth::user()->jabatan != 'staff') {
+            return view('pekerjaProyek.create', [
+                'getPegawai' => Pegawai::get(),
+                'getProyek' => $proyek,
+            ]);
+        } elseif (Auth::user()->jabatan == 'staff') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Proyek.');
+        }
     }
 
     /**
@@ -123,8 +128,11 @@ class PekerjaProyekController extends Controller
      */
     public function destroy(PekerjaProyek $pekerjaProyek)
     {
-        $pekerjaProyek->delete();
-
-        return redirect()->back()->with('success', 'Data has been deleted!');
+        if (Auth::user()->jabatan != 'staff') {
+            $pekerjaProyek->delete();
+            return redirect()->back()->with('success', 'Data has been deleted!');
+        } elseif (Auth::user()->jabatan == 'staff') {
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses ke halaman Proyek.');
+        }
     }
 }
